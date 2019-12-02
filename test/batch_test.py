@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import urllib.request
-import os
-URL=os.environ.get('PAINTSHOP_URL', "0.0.0.0:8080/v1")
+
+URL = os.environ.get('PAINTSHOP_URL', "0.0.0.0:8080/v1")
+
 
 def no_space_list(input_list):
-    return '['+','.join(map(str, input_list))+']'
+    return '[' + ','.join(map(str, input_list)) + ']'
 
 
 def process_content(content):
@@ -18,13 +20,17 @@ def process_content(content):
         number_of_customers = int(content[1])
         customer_demand = []
         for l in range(number_of_customers):
-            demand = list(map(int, content[l+2].split()))
+            demand = list(map(int, content[l + 2].split()))
             customer_demand.append(demand)
-        no_space_demands = '['+','.join(map(no_space_list, customer_demand))+']'
-        solution = urllib.request.urlopen("http://{}/?input={{\"colors\":{},\"customers\":{},\"demands\":{}}}".format(URL, number_of_colors, number_of_customers, no_space_demands)).read()
+        no_space_demands = '[' + ','.join(map(no_space_list, customer_demand)) + ']'
+        solution = urllib.request.urlopen(
+            "http://{}/?input={{\"colors\":{},\"customers\":{},\"demands\":{}}}".format(URL, number_of_colors,
+                                                                                        number_of_customers,
+                                                                                        no_space_demands)).read()
         output.append("Case #{}: {}".format(c + 1, solution.decode('utf-8')))
         content = content[number_of_customers + 2:]
-    return output	
+    return output
+
 
 def main(input_file):
     with open(input_file) as f:

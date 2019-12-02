@@ -1,5 +1,3 @@
-
-
 def solver(problem):
     colors = problem.get("colors")
     customers = problem.get("customers")
@@ -53,6 +51,7 @@ def start(colors, customers, mattes, glossy):
                 if sum(result_i) < sum(result):
                     result = result_i
     return solved, result
+
 
 def reduce(solution_on_stack, change, customers, mattes, glossy):
     solution = list(solution_on_stack)

@@ -1,12 +1,13 @@
 import unittest
+
 from solver import solver
 
 
 def convert_and_call(color, customers, demand):
     return solver({"colors": color, "customers": customers, "demands": demand})
 
-class PaintshopTest(unittest.TestCase):
 
+class PaintshopTest(unittest.TestCase):
 
     def test_impossible(self):
         demand = [[1, 1, 0], [1, 1, 1]]
@@ -24,5 +25,6 @@ class PaintshopTest(unittest.TestCase):
         demand = [[1, 5, 1], [2, 1, 0, 2, 1]]
         self.assertEqual(convert_and_call(5, 2, demand), "0 0 0 0 1")
 
+
 if __name__ == "__main__":
-     unittest.main()
+    unittest.main()
